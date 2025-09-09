@@ -32,7 +32,7 @@ Tahap berikutnya adalah URL resolution, di mana Django akan mencocokkan URL yang
 Setelah data diperoleh, view akan menyiapkan response, yang biasanya berupa rendering file template HTML atau data lain seperti JSON dalam kasus API. Kemudian, response dapat kembali diproses oleh template middleware, sebelum diteruskan lagi. Apabila terjadi error, maka request akan ditangani oleh exception middleware untuk menampilkan pesan error yang sesuai.
 
 Akhirnya, response akan melalui response middleware, lalu dikirim kembali ke WSGI, diteruskan ke web server, dan sampai pada browser client untuk ditampilkan kepada pengguna.
-##### Praseesh P. (2024) Django Request-Response Cycle Explained. [Article]. Medium. https://medium.com/@praseeshprasee/django-request-response-cycle-explained-e3d707eed99c
+###### source: Praseesh P. (2024) Django Request-Response Cycle Explained. [Article]. Medium. https://medium.com/@praseeshprasee/django-request-response-cycle-explained-e3d707eed99c
 
 ### 3) Jelaskan peran settings.py dalam proyek Django!
 settings.py berperan sebagai file utama untuk melakukan konfigurasi proyek Django yang ingin kita buat. Beberapa jenis konfigurasi yang dapat dilakukan adalah sebagai berikut.
