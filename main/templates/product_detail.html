@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<p><a href="{% url 'main:show_main' %}"><button>← Back to Catalog</button></a></p>
+
+<h1>{{ item.name }}</h1>
+<p><b>{{ item.get_category_display }}</b>{% if item.is_featured %} | 
+    <b>Featured</b> | <b>Brand: {{ item.brand }}</b>{% endif %}{% if item.size %} | 
+    <b>Size: {{ item.size }}</b>{% endif %} | <b> Rating: {{ item.rating }}</b> | 
+    <b>Price: Rp{{ item.price }}</b> | <b>Stock: {{ item.stock }}</b></p>
+
+{% if item.thumbnail %}
+<img src="{{ item.thumbnail }}" alt="Product thumbnail" width="300">
+<br /><br />
+{% endif %}
+
+<p>{{ item.description }}</p>
+
+{% endblock content %}
