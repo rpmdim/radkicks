@@ -1,8 +1,7 @@
 Raden Pandji Mohammad Dimaz Bagus Hayyii Dausti Surya - 2406439343 - PBP C
+## TAUTAN: https://raden-pandji-radkicks.pbp.cs.ui.ac.id
 
 # README.md for Tugas 2
-
-## TAUTAN: https://raden-pandji-radkicks.pbp.cs.ui.ac.id
 
 ## JAWABAN DARI PERTANYAAN TUGAS 2
 ### 1) Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
