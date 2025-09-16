@@ -57,6 +57,7 @@ Menurut pendapat saya, Django merupakan framework yang tepat untuk memulai pembe
 Saya rasa, asisten dosen sangat membantu mahasiswa yang membutuhkan bantuan mereka. Dengan mereka standby di discord atau kelas saat jam lab, mahasiswa tidak perlu khawatir jika mereka melakukan kesalahan atau kebingungan.
 
 
+
 # README.md for Tugas 3
 
 ## JAWABAN DARI PERTANYAAN TUGAS 3
@@ -92,7 +93,14 @@ Saya memodifikasi settings.py pada root project dengan menambahkan daftar CSRF_T
 Seperti yang disebut minggu lalu, saya rasa, asisten dosen sangat membantu mahasiswa yang membutuhkan bantuan mereka. Dengan mereka standby di discord atau kelas saat jam lab, mahasiswa tidak perlu khawatir jika mereka melakukan kesalahan atau kebingungan. Dari itu, saya sangat mengapresiasi asisten dosen yang senantiasa membantu mahasiswa yang kesulitan. Akan tetapi, saya rasa belajar dari tutorial saja atau sumber eksternal masih kurang. Maka, alangkah baiknya jika diadakan asistensi tambahan dari asdos untuk menjelaskan _syntax-syntax_ web development supaya dapat melancarkan keberlangsungan pengerjaan tugas.
 
 ## SCREENSHOT HASIL AKSES URL PADA POSTMAN
+### 1) SCREENSHOT AKSES URL XML
 <img width="1919" height="1016" alt="image" src="https://github.com/user-attachments/assets/16cfbefa-46da-4ef1-a896-cfbbb356dc65" />
+
+### 2) SCREENSHOT AKSES URL JSON
 <img width="1919" height="1017" alt="image" src="https://github.com/user-attachments/assets/1ddc0a13-6835-4576-9ebc-97f7b97e608e" />
+
+### 3) SCREENSHOT AKSES URL XML BY ID
 <img width="1919" height="1021" alt="image" src="https://github.com/user-attachments/assets/2d8dd919-796f-4bd3-a31a-fc576a3e1f0a" />
+
+### 4) SCREENSHOT AKSES URL JSON BY ID
 <img width="1919" height="1018" alt="image" src="https://github.com/user-attachments/assets/67e6b10a-9b8a-4f9d-935a-ae9f6238def2" />
