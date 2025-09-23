@@ -14,5 +14,12 @@
 {% endif %}
 
 <p>{{ item.description }}</p>
+{% if item.user %}
+    <p>Seller: {{ item.user.username }}</p>
+{% else %}
+    <p>Seller: A Football Head</p>
+{% endif %}
+<!-- my creative configuration for default seller name if user is not available -->
+<!-- if it's misleading, tell me yeah T_T -->
 
 {% endblock content %}
