@@ -35,12 +35,12 @@
 
     <!-- Products Grid -->
     {% if not item_list %}
-      <div class="bg-white rounded-lg border border-gray-200 p-12 text-center">
+      <div class="bg-[#1E2A4F] rounded-lg border border-black p-12 text-center">
         <div class="w-32 h-32 mx-auto mb-4">
           <img src="{% static 'image/no-products-yet.png' %}" alt="No products available" class="w-full h-full object-contain">
         </div>
-        <h3 class="text-lg font-medium text-gray-900 mb-2">No products found</h3>
-        <p class="text-gray-500 mb-6">Be the first to share kickin' products with the community.</p>
+        <h3 class="text-lg font-medium text-gray-100 mb-2">Oops! Boxes are empty! No products yet!</h3>
+        <p class="text-gray-200 mb-6">Be the first to sell kickin' products with the community.</p>
         <a href="{% url 'main:add_product' %}" class="inline-flex items-center px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors">
           Add Product
         </a>
