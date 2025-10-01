@@ -1,56 +1,57 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>RADKICKS</title>
+{% endblock meta %}
+
 {% block content %}
-<h1>RADKICKS</h1>
+{% include 'navbar.html' %}
+<div class="bg-gradient-to-b from-[#1E2A4F] to-[#4F1E2A] w-full pt-16 min-h-screen">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
-<h5>NPM: </h5>
-<p>{{ npm }}</p>
+    <!-- Header Section -->
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold text-red-500 mb-2">All Sweet Products from RADKICKS!</h1>
+      <p class="text-orange-100">Stay updated with the latest kickin' products and kickin' offers!</p>
+    </div>
 
-<h5>Name:</h5>
-<p>{{ name }}</p>
+    <!-- Filter Section -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8 bg-red-700 rounded-lg border border-red-900 p-4">
+      <div class="flex space-x-3 mb-4 sm:mb-0">
+        <a href="?" class="{% if request.GET.filter == 'all' or not request.GET.filter  %} bg-gradient-to-r from-red-500 to-fuchsia-500 text-white{% else %}bg-white text-gray-700 border border-gray-300{% endif %} px-4 py-2 rounded-md font-medium transition-colors hover:bg-red-500 hover:text-yellow-400">
+          All Products
+        </a>
+        <a href="?filter=my" class="{% if request.GET.filter == 'my' %} bg-gradient-to-r from-red-500 to-fuchsia-500 text-white{% else %}bg-white text-gray-700 border border-gray-300{% endif %} px-4 py-2 rounded-md font-medium transition-colors hover:bg-red-500 hover:text-yellow-400">
+          My Products
+        </a>
+      </div>
+      {% if user.is_authenticated %}
+        <div class="text-sm text-white">
+          Last login: {{ last_login }}
+        </div>
+      {% endif %}
+    </div>
 
-<h5>Class:</h5>
-<p>{{ class }}</p>
-
-<a href="{% url 'main:add_product' %}">
-<button>+ Add Product</button>
-</a>
-<a href="{% url 'main:logout' %}">
-  <button>Logout</button>
-</a>
-<h5>Sesi terakhir login: {{ last_login }}</h5>
-<a href="?filter=all">
-    <button type="button">All Products</button>
-</a>
-<a href="?filter=my">
-    <button type="button">My Products</button>
-</a>
-<hr>
-
-{% if not item_list %}
-<p>Belum ada data produk pada katalog RADKICKS.</p>
-{% else %}
-
-{% for item in item_list %}
-<div>
-<h2><a href="{% url 'main:show_product' item.id %}">{{ item.name }}</a></h2>
-
-<p><b>{{ item.get_category_display }}</b>{% if item.is_featured %} | 
-    <b>Featured</b> | <b>Brand: {{ item.brand }}</b>{% endif %}{% if item.size %} | 
-    <b>Size: {{ item.size }}</b>{% endif %} | <b> Rating: {{ item.rating }}</b> | 
-    <b>Price: Rp{{ item.price }}</b> | <b>Stock: {{ item.stock }}</b></p>
-
-{% if item.thumbnail %}
-<img src="{{ item.thumbnail }}" alt="thumbnail" width="150" height="100">
-<br />
-{% endif %}
-
-<p>{{ item.description|truncatewords:25 }}...</p>
-
-<p><a href="{% url 'main:show_product' item.id %}"><button>Read Product Detail</button></a></p>
+    <!-- Products Grid -->
+    {% if not item_list %}
+      <div class="bg-white rounded-lg border border-gray-200 p-12 text-center">
+        <div class="w-32 h-32 mx-auto mb-4">
+          <img src="{% static 'image/no-products-yet.png' %}" alt="No products available" class="w-full h-full object-contain">
+        </div>
+        <h3 class="text-lg font-medium text-gray-900 mb-2">No products found</h3>
+        <p class="text-gray-500 mb-6">Be the first to share kickin' products with the community.</p>
+        <a href="{% url 'main:add_product' %}" class="inline-flex items-center px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors">
+          Add Product
+        </a>
+      </div>
+    {% else %}
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for item in item_list %}
+          {% include 'card_product.html' with item=item %}
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
 </div>
-
-<hr>
-{% endfor %}
-
-{% endif %}
 {% endblock content %}
