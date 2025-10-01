@@ -83,7 +83,7 @@ csrf_token adalah token keamanan unik yang ditambahkan ke setiap form pada templ
 ### 5) Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
 Dalam project radkicks, saya membuat berkas base.html pada root folder sebagai template dasar untuk seluruh kode HTML yang saya gunakan selanjutnya. Saya memperbarui bagian DIRS pada settings.py agar Django dapat mendeteksi base.html, lalu saya menyesuaikan berkas main.html di direktori main supaya mengikuti struktur template tersebut. Setelah itu, saya membuat berkas forms.py pada direktori main untuk membangun struktur form yang menerima data produk baru. Di dalamnya, saya mengimpor ModelForm dari django.forms dan model Product dari main.models, kemudian saya mendefinisikan kelas ProductForm yang mewarisi ModelForm dengan subkelas Meta berisi atribut model = Products serta daftar fields sesuai dengan field pada model.
 
-Saya menambahkan fungsi add_product dengan parameter request yang membuat variabel form baru menggunakan NewsForm(request.POST or None). Fungsi ini memvalidasi data yang masuk dan mengarahkan pengguna ke fungsi show_main jika data valid. Jika tidak, fungsi merender tampilan add_product.html dengan context berisi form. Selanjutnya, saya menambahkan fungsi show_product dengan parameter request dan id. Di dalamnya, saya mengambil data produk menggunakan get_object_or_404(Product, pk=id) lalu merender tampilan product_detail.html dengan context produk tersebut. Saya mengimpor kedua fungsi ini pada urls.py dan menambahkan path baru pada urlpatterns agar pengguna dapat mengaksesnya melalui URL.
+Saya menambahkan fungsi add_product dengan parameter request yang membuat variabel form baru menggunakan ProductForm(request.POST or None). Fungsi ini memvalidasi data yang masuk dan mengarahkan pengguna ke fungsi show_main jika data valid. Jika tidak, fungsi merender tampilan add_product.html dengan context berisi form. Selanjutnya, saya menambahkan fungsi show_product dengan parameter request dan id. Di dalamnya, saya mengambil data produk menggunakan get_object_or_404(Product, pk=id) lalu merender tampilan product_detail.html dengan context produk tersebut. Saya mengimpor kedua fungsi ini pada urls.py dan menambahkan path baru pada urlpatterns agar pengguna dapat mengaksesnya melalui URL.
 
 Saya juga memodifikasi main.html dengan menambahkan tombol Add Product untuk mempermudah pengguna menambahkan produk baru. Saya menambahkan conditional untuk mengecek apakah product_list tersedia atau tidak. Jika tidak ada produk, halaman menampilkan pesan “Belum ada data produk pada katalog RADKICKS.”. Jika tersedia, halaman menampilkan daftar produk lengkap dengan nama, kategori, status featured, thumbnail, brand, harga, ukuran, stok, dan rating. Untuk tampilan form, saya membuat file add_product.html dengan menambahkan {% csrf_token %} sebagai lapisan keamanan dan {{ form.as_table }} untuk menampilkan field form dalam tabel. Saya juga membuat file product_detail.html yang menampilkan detail produk meliputi nama, kategori, status featured, thumbnail, brand, harga, ukuran, stok, rating, dan deskripsi.
 
@@ -106,8 +106,8 @@ Seperti yang disebut minggu lalu, saya rasa, asisten dosen sangat membantu mahas
 <img width="1919" height="1018" alt="image" src="https://github.com/user-attachments/assets/67e6b10a-9b8a-4f9d-935a-ae9f6238def2" />
 </details>
 
-
-# README.md for Tugas 4
+<details>
+<summary>README.md for Tugas 4</summary>
 
 ## JAWABAN DARI PERTANYAAN TUGAS 4
 ### 1) Apa itu Django AuthenticationForm? Jelaskan juga kelebihan dan kekurangannya.
@@ -169,3 +169,4 @@ Terakhir, saya membuat dua akun baru yaitu ojanojin, dan ishowspeedsui, lalu men
 <img width="1861" height="731" alt="image" src="https://github.com/user-attachments/assets/4ace974d-a90a-46b4-859a-74f9753b438a" />
 <img width="1865" height="816" alt="image" src="https://github.com/user-attachments/assets/227f1e0e-3a75-49d2-a460-2cba89082b27" />
 <img width="1866" height="735" alt="image" src="https://github.com/user-attachments/assets/f38677f8-ca5a-41b4-9b20-ea21f262870d" />
+</details>
