@@ -171,8 +171,8 @@ Terakhir, saya membuat dua akun baru yaitu ojanojin, dan ishowspeedsui, lalu men
 <img width="1866" height="735" alt="image" src="https://github.com/user-attachments/assets/f38677f8-ca5a-41b4-9b20-ea21f262870d" />
 </details>
 
-
-# README.md for Tugas 5
+<details>
+<summary>README.md for Tugas 5</summary>
 
 ## JAWABAN DARI PERTANYAAN TUGAS 5
 ### 1) Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!
@@ -205,3 +205,36 @@ Lalu, saya membuat sebuah file baru bernama navbar.html di dalam folder template
 Kemudian, saya membuat sebuah file baru bernama global.css di dalam folder /static/css pada root project. File ini saya siapkan khusus untuk menampung style CSS buatan saya sendiri, sehingga saya bisa menambahkan aturan styling custom di luar Tailwind. Setelah itu, saya membuka file base.html. Di bagian head, saya menambahkan dua hal. Pertama, script CDN Tailwind supaya saya bisa langsung menggunakan utility class Tailwind. Kedua, saya menautkan file global.css yang sudah saya buat sebelumnya dengan menggunakan tag link dan static. Dengan begitu, setiap halaman yang mewarisi base.html otomatis bisa menggunakan style dari Tailwind sekaligus style tambahan dari global.css. Selanjutnya, saya menambahkan beberapa aturan CSS khusus di dalam file global.css. Saya membuat styling dengan class form-style yang ditujukan untuk form, input, textarea, dan select. Aturannya saya buat agar setiap elemen form punya lebar penuh, padding yang nyaman, border abu-abu, serta sudut yang melengkung. Saya juga menambahkan efek fokus. Ketika input difokuskan, border berubah menjadi merah dengan tambahan box-shadow. Ini membuat pengguna lebih mudah melihat bahwa input tersebut sedang aktif. Saya juga memberikan styling khusus untuk checkbox. Checkbox saya atur agar ukurannya lebih besar, punya border abu-abu, dan latar belakang putih. Ketika checkbox dicentang, warnanya berubah menjadi merah dengan simbol centang putih di tengah. Jika pengguna fokus pada checkbox, border akan berubah warna dan diberi efek shadow merah lembut. Setelah semuanya, saya push ke master.
 
 Lalu, saya membuat navbar.html untuk implementasi di desktop DAN mobile agar aplikasi memiliki navigasi yang konsisten dan mudah digunakan, kemudian saya include ke halaman utama. Selanjutnya, saya menata tampilan halaman login dan register supaya lebih rapi sekaligus menampilkan pesan error atau notifikasi dengan jelas. Saya juga menambahkan komponen card_product.html agar daftar produk terlihat seragam dan mudah dibaca, serta menata halaman product_detail.html dengan thumbnail, badge seperti tipe produk, stock, featured, rating, dan informasi penjual agar lebih menarik. Saya juga punya image bertulisan NO PRODUCTS YET dengan gambar kotak sepatu kosong jika belum ada produk yang ditambahkan. Terakhir, saya memastikan form di halaman add_product dan edit_product menggunakan styling yang konsisten sehingga pengalaman pengguna lebih baik. Dengan semua langkah ini, aplikasi saya kini tampil dengan desain yang modern, bersih, dan responsif.
+</details>
+
+# README.md for Tugas 6
+
+## JAWABAN DARI PERTANYAAN TUGAS 6
+### 1) Apa perbedaan antara synchronous request dan asynchronous request?
+Dalam synchronous request, ketika pengguna melakukan aksi (seperti mengklik tombol), browser akan mengirim permintaan ke server dan berhenti total untuk menunggu respons. Selama menunggu, pengguna tidak bisa berinteraksi dengan halaman web sama sekali sampai server selesai memproses dan mengirimkan halaman baru secara utuh.
+
+Sebaliknya, pada asynchronous request (menggunakan AJAX), ketika ada aksi, JavaScript mengirim permintaan ke server di latar belakang. Pengguna tetap bisa menggunakan halaman web seperti biasa selagi permintaan diproses. Setelah server mengirimkan data (bukan halaman penuh), JavaScript akan memperbarui hanya bagian tertentu dari halaman. Karena tidak ada waktu tunggu yang memblokir, metode ini terasa jauh lebih cepat dan responsif bagi pengguna.
+
+### 2) Bagaimana AJAX bekerja di Django (alur request–response)?
+Alur kerja AJAX dalam aplikasi Django dapat dirangkum sebagai berikut:
+1. Pemicu di Browser: Sebuah event (misalnya, klik tombol atau input data) memicu fungsi JavaScript.
+2. Pengiriman Request: JavaScript, melalui fetch API atau XHR, mengirimkan request ke URL spesifik di server Django tanpa me-reload halaman. Untuk request POST, header X-CSRFToken harus disertakan untuk keamanan.
+3. Routing di Django: urls.py menerima request dan meneruskannya ke view yang sesuai.
+4. Proses di View: View memproses data yang diterima, berinteraksi dengan database jika perlu, dan menyiapkan response, biasanya dalam format JSON.
+5. Pembaruan Halaman: Response dikirim kembali ke browser. JavaScript kemudian menerima data JSON ini dan secara dinamis mengubah konten HTML (DOM) pada halaman—seperti mengisi tabel atau menampilkan notifikasi—tanpa perlu memuat ulang seluruh halaman.
+
+### 3) Apa keuntungan menggunakan AJAX dibandingkan render biasa di Django?
+Menggunakan AJAX dibandingkan render halaman biasa di Django menawarkan beberapa keunggulan utama:
+- Responsivitas Tinggi: Aplikasi terasa lebih cepat karena hanya bagian kecil dari halaman yang diperbarui, bukan seluruhnya. Ini menghilangkan jeda yang disebabkan oleh full page reload.
+- Pengalaman Pengguna yang Lancar: Pengguna dapat terus berinteraksi dengan halaman web bahkan saat server sedang memproses permintaan di latar belakang, sangat ideal untuk fitur real-time seperti chat atau notifikasi.
+- Pemisahan Frontend dan Backend: AJAX mendorong pemisahan tugas yang jelas. Tim backend (Django) fokus pada penyediaan data melalui API, sementara tim frontend (JavaScript) fokus pada tampilan dan interaksi pengguna, sehingga mempermudah kolaborasi.
+
+### 4) Bagaimana cara memastikan keamanan saat menggunakan AJAX untuk fitur Login dan Register di Django?
+Untuk mengamankan fitur login dan registrasi yang menggunakan AJAX di Django, terapkan langkah-langkah berikut:
+- Proteksi CSRF (Cross-Site Request Forgery): Pastikan {% csrf_token %} ada di template dan JavaScript mengirimkan token tersebut dalam header X-CSRFToken pada setiap request POST. Ini mencegah pihak luar memalsukan permintaan atas nama pengguna.
+- Otentikasi dan Otorisasi: Gunakan decorator seperti @login_required untuk melindungi view yang hanya boleh diakses oleh pengguna yang sudah login. Selain itu, selalu verifikasi kepemilikan data (misalnya, produk.user == request.user) untuk memastikan pengguna tidak mengubah data milik orang lain.
+- Validasi di Sisi Server: Selalu gunakan Django Forms untuk memvalidasi semua data yang masuk dari request. Gunakan form.is_valid() untuk memastikan tipe dan format data sudah benar sebelum disimpan.
+- Respons Error yang Minimal: Jika terjadi kegagalan login, kirim JsonResponse dengan pesan yang umum (contoh: "Kredensial tidak valid") dan jangan memberikan detail spesifik tentang kesalahan (seperti "Password salah") yang bisa dieksploitasi.
+
+### 5) Bagaimana AJAX mempengaruhi pengalaman pengguna (User Experience) pada website?
+AJAX secara signifikan meningkatkan User Experience (UX) dengan membuat website terasa lebih dinamis dan interaktif. Karena tidak ada proses muat ulang halaman penuh, interaksi seperti memfilter produk, mencari data, atau validasi formulir terjadi secara instan dan mulus. Fitur seperti notifikasi atau pembaruan data real-time juga dapat diimplementasikan dengan mudah. Ini memberikan pengalaman pengguna yang lebih lancar dan modern. Namun, jika tidak diimplementasikan dengan baik, perubahan konten yang tiba-tiba dapat membingungkan pengguna. Oleh karena itu, penting untuk memberikan umpan balik visual yang jelas, seperti ikon loading, untuk menandakan bahwa sebuah proses sedang berjalan di latar belakang.
