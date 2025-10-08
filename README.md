@@ -211,9 +211,9 @@ Lalu, saya membuat navbar.html untuk implementasi di desktop DAN mobile agar apl
 
 ## JAWABAN DARI PERTANYAAN TUGAS 6
 ### 1) Apa perbedaan antara synchronous request dan asynchronous request?
-Dalam synchronous request, ketika pengguna melakukan aksi (seperti mengklik tombol), browser akan mengirim permintaan ke server dan berhenti total untuk menunggu respons. Selama menunggu, pengguna tidak bisa berinteraksi dengan halaman web sama sekali sampai server selesai memproses dan mengirimkan halaman baru secara utuh.
+Synchronous berarti prosesnya berjalan secara berurutan dan harus ditunggu. Saat sebuah aksi dilakukan, misalnya sebuah tombol diklik, browser akan mengirim permintaan ke server. Selama permintaan diproses, seluruh halaman menjadi tidak responsif atau freeze. Tidak ada interaksi lain yang dapat dilakukan hingga server selesai memproses dan mengirim kembali satu halaman penuh yang baru.
 
-Sebaliknya, pada asynchronous request (menggunakan AJAX), ketika ada aksi, JavaScript mengirim permintaan ke server di latar belakang. Pengguna tetap bisa menggunakan halaman web seperti biasa selagi permintaan diproses. Setelah server mengirimkan data (bukan halaman penuh), JavaScript akan memperbarui hanya bagian tertentu dari halaman. Karena tidak ada waktu tunggu yang memblokir, metode ini terasa jauh lebih cepat dan responsif bagi pengguna.
+Sedangkan Asynchronous (AJAX), prosesnya tidak saling menunggu. Ketika sebuah aksi dilakukan, permintaan akan dikirim ke server di latar belakang. Sambil menunggu respons dari server, halaman web tetap bisa di-scroll, formulir tetap bisa diisi, atau interaksi lainnya dapat terus dilakukan. Begitu server selesai merespons, hanya bagian tertentu dari halaman saja yang akan diperbarui dengan data baru, tanpa perlu ada proses muat ulang keseluruhan.
 
 ### 2) Bagaimana AJAX bekerja di Django (alur request–response)?
 Alur kerja AJAX dalam aplikasi Django dapat dirangkum sebagai berikut:
@@ -221,7 +221,7 @@ Alur kerja AJAX dalam aplikasi Django dapat dirangkum sebagai berikut:
 2. Pengiriman Request: JavaScript, melalui fetch API atau XHR, mengirimkan request ke URL spesifik di server Django tanpa me-reload halaman. Untuk request POST, header X-CSRFToken harus disertakan untuk keamanan.
 3. Routing di Django: urls.py menerima request dan meneruskannya ke view yang sesuai.
 4. Proses di View: View memproses data yang diterima, berinteraksi dengan database jika perlu, dan menyiapkan response, biasanya dalam format JSON.
-5. Pembaruan Halaman: Response dikirim kembali ke browser. JavaScript kemudian menerima data JSON ini dan secara dinamis mengubah konten HTML (DOM) pada halaman—seperti mengisi tabel atau menampilkan notifikasi—tanpa perlu memuat ulang seluruh halaman.
+5. Pembaruan Halaman: Response dikirim kembali ke browser. JavaScript kemudian menerima data JSON ini dan secara dinamis mengubah konten HTML (DOM) pada halaman, seperti mengisi tabel atau menampilkan notifikasi tanpa perlu memuat ulang seluruh halaman.
 
 ### 3) Apa keuntungan menggunakan AJAX dibandingkan render biasa di Django?
 Menggunakan AJAX dibandingkan render halaman biasa di Django menawarkan beberapa keunggulan utama:
