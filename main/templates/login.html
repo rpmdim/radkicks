@@ -76,6 +76,50 @@
     </button>
   </form>
 
+  <script>
+    // AJAX login: intercept submit and send JSON-aware request with CSRF
+    (function(){
+      function getCookie(name) {
+        const v = document.cookie.split('; ').find(c => c.startsWith(name + '='));
+        return v ? decodeURIComponent(v.split('=')[1]) : null;
+      }
+
+      const form = document.querySelector('form');
+      if (!form) return;
+      form.addEventListener('submit', async function(e){
+        e.preventDefault();
+        const data = new FormData(form);
+        try {
+          const res = await fetch(form.action || window.location.href, {
+            method: 'POST',
+            body: data,
+            headers: {
+              'X-Requested-With': 'XMLHttpRequest',
+              'X-CSRFToken': getCookie('csrftoken'),
+              'Accept': 'application/json'
+            },
+            credentials: 'same-origin'
+          });
+
+          if (res.ok) {
+            const j = await res.json();
+            if (j.redirect) window.location = j.redirect;
+            else window.location.reload();
+            return;
+          }
+
+          // show minimal error
+          const err = await res.json().catch(()=> null);
+          const msg = err && err.error ? err.error : 'Login failed';
+          showToast('Error', msg, 'error');
+        } catch (err) {
+          console.error('Login AJAX error', err);
+          showToast('Error', 'Network error during login', 'error');
+        }
+      });
+    })();
+  </script>
+
   <!-- Messages Display -->
   {% if messages %}
     <div class="mt-6">

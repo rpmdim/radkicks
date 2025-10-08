@@ -91,6 +91,52 @@
     </button>
   </form>
 
+  <script>
+    (function(){
+      function getCookie(name) {
+        const v = document.cookie.split('; ').find(c => c.startsWith(name + '='));
+        return v ? decodeURIComponent(v.split('=')[1]) : null;
+      }
+      const form = document.querySelector('form');
+      if (!form) return;
+      form.addEventListener('submit', async function(e){
+        e.preventDefault();
+        const data = new FormData(form);
+        try {
+          const res = await fetch(form.action || window.location.href, {
+            method: 'POST',
+            body: data,
+            headers: {
+              'X-Requested-With': 'XMLHttpRequest',
+              'X-CSRFToken': getCookie('csrftoken'),
+              'Accept': 'application/json'
+            },
+            credentials: 'same-origin'
+          });
+
+          const json = await res.json().catch(()=> null);
+          if (res.ok && json && json.success) {
+            if (json.redirect) window.location = json.redirect;
+            else showToast('Success', 'Account created', 'success');
+            return;
+          }
+
+          // Show field errors if provided
+          if (json && json.errors) {
+            const messages = Object.entries(json.errors).map(([k, v]) => `${k}: ${v.join(', ')}`).join('\n');
+            showToast('Validation error', messages, 'error');
+            return;
+          }
+
+          showToast('Error', 'Registration failed', 'error');
+        } catch (err) {
+          console.error('Register AJAX error', err);
+          showToast('Error', 'Network error during registration', 'error');
+        }
+      });
+    })();
+  </script>
+
   <!-- Messages Display -->
   {% if messages %}
     <div class="mt-6">

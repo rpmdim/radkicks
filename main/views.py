@@ -121,7 +121,16 @@ def register(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Your account has been successfully created!')
+            # If this is an AJAX request, return JSON with redirect target
+            if request.headers.get('x-requested-with') == 'XMLHttpRequest' or 'application/json' in request.headers.get('Accept', ''):
+                return JsonResponse({'success': True, 'redirect': reverse('main:login')})
             return redirect('main:login')
+        else:
+            # For AJAX requests return validation errors (field-level) as JSON
+            if request.headers.get('x-requested-with') == 'XMLHttpRequest' or 'application/json' in request.headers.get('Accept', ''):
+                # Convert form.errors (ErrorDict) to normal dict
+                errors = {k: [str(e) for e in v] for k, v in form.errors.items()}
+                return JsonResponse({'success': False, 'errors': errors}, status=400)
     context = {'form':form}
     return render(request, 'register.html', context)
 
@@ -133,7 +142,14 @@ def login_user(request):
             login(request, user)
             response = HttpResponseRedirect(reverse("main:show_main"))
             response.set_cookie('last_login', str(datetime.datetime.now()))
+            # Return JSON for AJAX consumers
+            if request.headers.get('x-requested-with') == 'XMLHttpRequest' or 'application/json' in request.headers.get('Accept', ''):
+                return JsonResponse({'success': True, 'redirect': reverse('main:show_main')})
             return response
+        else:
+            # For AJAX, return a minimal error message (do not leak details)
+            if request.headers.get('x-requested-with') == 'XMLHttpRequest' or 'application/json' in request.headers.get('Accept', ''):
+                return JsonResponse({'success': False, 'error': 'Invalid credentials'}, status=400)
     else:
        form = AuthenticationForm(request)
     context = {'form': form}
